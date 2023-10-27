@@ -1,6 +1,15 @@
 #include <iostream>
+#include <string>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+class Student{
+    private :
+    std::string firstname,lastname;
+    int age;
+    int numberGrades;
+    double* grades;
+    double averageGrade;
+};
+
+int main(){
+
 }
