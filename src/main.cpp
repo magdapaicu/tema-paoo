@@ -1,7 +1,7 @@
 #include "Student.h"
 
 int main() {
-  double studentGrades[] = {5, 9.0, 5.5};
+  double studentGrades[] = {2, 9.0, 3};
   Student student("Magda", 21, 3, studentGrades);
 
   student.setAge(22);
