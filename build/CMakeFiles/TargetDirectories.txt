@@ -1,0 +1,6 @@
+/home/magda/Desktop/tema/tema-paoo/build/CMakeFiles/Tema1.dir
+/home/magda/Desktop/tema/tema-paoo/build/CMakeFiles/edit_cache.dir
+/home/magda/Desktop/tema/tema-paoo/build/CMakeFiles/rebuild_cache.dir
+/home/magda/Desktop/tema/tema-paoo/build/lib/CMakeFiles/StudentLib.dir
+/home/magda/Desktop/tema/tema-paoo/build/lib/CMakeFiles/edit_cache.dir
+/home/magda/Desktop/tema/tema-paoo/build/lib/CMakeFiles/rebuild_cache.dir
