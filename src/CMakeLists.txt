@@ -14,4 +14,3 @@ target_link_libraries(Tema1 PUBLIC StudentLib)
 target_include_directories(Tema1 PUBLIC
                           "${PROJECT_BINARY_DIR}"
                           "${PROJECT_SOURCE_DIR}/lib")
-                          
