@@ -9,18 +9,20 @@ Student::Student(std::string n, int a, int numberGrades, double *g)
       grades[i] = g[i];
     }
   } else {
-    grades = nullptr;
+    this->grades = nullptr; 
   }
   std::cout << "Constructor cu parametri apelat." << std::endl;
 }
 
 // Destructor
+
 Student::~Student() {
   delete[] grades;
   std::cout << "Destructor apelat." << std::endl;
 }
 
 // Setters and Getters
+
 std::string Student::getName() const {
   return name;
 }
@@ -58,26 +60,27 @@ void Student::setGrades(double *g, int numberGrades) {
 }
 
 // Copy constructor
-Student::Student(const Student &other)
+
+Student::Student(const Student& other)
     : name(other.name), age(other.age), numberGrades(other.numberGrades) {
   if (other.grades != nullptr) {
-    grades = new double[numberGrades];
+    this->grades = new double[numberGrades];
     for (int i = 0; i < numberGrades; i++) {
-      grades[i] = other.grades[i];
+      this->grades[i] = other.grades[i];
     }
   } else {
-    grades = nullptr;
+    this->grades = nullptr;
   }
   std::cout << "Constructor de copiere apelat." << std::endl;
 }
 
 // Move Constructor
-Student::Student(Student &&other)
+
+Student::Student(Student&& other)
     : name(std::move(other.name)), age(other.age), grades(other.grades) {
-  other.grades = nullptr;
+  other.grades = nullptr; 
   std::cout << "Constructor de mutare apelat." << std::endl;
 }
-
 double Student::calculateAverageGrade() {
   if (grades == nullptr || numberGrades == 0) {
     return 0.0;
@@ -97,7 +100,7 @@ void Student::printStudentInfo() {
     }
     std::cout << ", Average Grade: " << calculateAverageGrade();
   } else {
-    std::cout << "N/A";
+    std::cout << "The student has no grade! ";
   }
   std::cout << std::endl;
 }
