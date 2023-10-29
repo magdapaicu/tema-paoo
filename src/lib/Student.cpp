@@ -77,10 +77,17 @@ Student::Student(const Student& other)
 // Move Constructor
 
 Student::Student(Student&& other)
-    : name(std::move(other.name)), age(other.age), grades(other.grades) {
-  other.grades = nullptr; 
+    : name(std::move(other.name)), age(std::move(other.age)), grades(other.grades) {
+  other.grades = nullptr;  
   std::cout << "Constructor de mutare apelat." << std::endl;
 }
+
+// Student::Student(Student&& other)
+//     : name(std::move(other.name)), age(std::move(other.age)), grades(std::move(other.grades)) {
+//   std::cout << "Constructor de mutare apelat." << std::endl;
+// }
+// Daca folosesc acest constructor atunci cand se va distruge obiectul va aparea double free
+
 double Student::calculateAverageGrade() {
   if (grades == nullptr || numberGrades == 0) {
     return 0.0;
