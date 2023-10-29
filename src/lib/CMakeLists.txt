@@ -1,0 +1,1 @@
+add_library(StudentLib STATIC Student.cpp)
