@@ -1,0 +1,38 @@
+#include "PostgraduateStudent.h"
+#include <iostream>
+
+PostgraduateStudent::PostgraduateStudent(std::string n, int a, int numberGrades, double *g)
+    : Student(n, a, numberGrades, g) {
+    // Implementare constructor
+    std::cout << "Postgraduate student created: " << n << std::endl;
+}
+
+void PostgraduateStudent::displayDetails() {
+    std::cout << "Postgraduate student details:" << std::endl;
+    std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;
+    std::cout << "Grades: ";
+    double *grades = getGrades();
+    if (grades != nullptr) {
+        for (int i = 0; i < numberGrades; i++) {
+            std::cout << grades[i] << " ";
+        }
+        std::cout << ", Average Grade: " << calculateAverageGrade();
+    } else {
+        std::cout << "The student has no grade!";
+    }
+    std::cout << std::endl;
+}
+
+double PostgraduateStudent::calculateGradePointAverage() {
+    // Calcularea mediei pentru studentul postuniversitar
+    double sum = 0.0;
+    double *grades = getGrades();
+    if (grades != nullptr) {
+        for (int i = 0; i < numberGrades; i++) {
+            sum += grades[i];
+        }
+        return sum / numberGrades;
+    } else {
+        return 0.0;
+    }
+}

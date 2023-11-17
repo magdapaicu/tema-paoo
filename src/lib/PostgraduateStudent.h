@@ -1,9 +1,9 @@
 #pragma once
 #include "Student.h"
 
-class UndergraduateStudent : public Student {
+class PostgraduateStudent : public Student {
 public:
-    UndergraduateStudent(std::string n, int a, int numberGrades, double *g);
+    PostgraduateStudent(std::string n, int a, int numberGrades, double *g);
     // Alți constructori, destructor și alte funcții specifice
 
     // Suprascrierea funcțiilor virtuale pure
