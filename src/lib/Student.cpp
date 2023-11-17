@@ -16,7 +16,7 @@ Student::Student(std::string n, int a, int numberGrades, double *g)
 
 // Destructor
 
-Student::~Student() {
+virtual ~Student() {
   delete[] grades;
   std::cout << "Destructor apelat." << std::endl;
 }

@@ -22,4 +22,6 @@ public:
   Student(Student &&other);
   double calculateAverageGrade();
   void printStudentInfo();
+  virtual void displayDetails() const = 0;
+  virtual double calculateGradePointAverage() const = 0;
 };
