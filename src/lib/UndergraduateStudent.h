@@ -11,6 +11,5 @@ UndergraduateStudent(std::string name, int age, int numberGRades, double *grades
 void displayDEtails() const override;
 double calculateGRadePointAverage() const override;
 
-};
-
+   };
 }
