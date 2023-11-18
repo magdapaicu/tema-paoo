@@ -1,10 +1,16 @@
 #include "PostgraduateStudent.h"
 #include <iostream>
 
+namespace University {
+
 PostgraduateStudent::PostgraduateStudent(std::string n, int a, int numberGrades, double *g)
     : Student(n, a, numberGrades, g) {
     // Implementare constructor
     std::cout << "Postgraduate student created: " << n << std::endl;
+}
+
+void PostgraduateStudent::introduce() {
+    std::cout << "Hello, I'm a postgraduate student." << std::endl;
 }
 
 void PostgraduateStudent::displayDetails() {
@@ -35,4 +41,5 @@ double PostgraduateStudent::calculateGradePointAverage() {
     } else {
         return 0.0;
     }
+  }
 }

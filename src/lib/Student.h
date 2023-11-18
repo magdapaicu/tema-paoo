@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
+#include <iostream>
+
+namespace University{
 
 class Student {
-  
+
 private:
     std::string name;
     int age;
@@ -21,10 +24,9 @@ public:
     Student(const Student &other);
     Student(Student &&other);
 
-    // Destructor
+    // Destructor, functie virtuala
     virtual ~Student();
 
-    // Operatori de asignare
     Student& operator=(const Student& other);
     Student& operator=(Student&& other);
 
@@ -39,7 +41,12 @@ public:
     double calculateAverageGrade();
     void printStudentInfo();
 
+    void introduce() const {
+    std::cout << "Hello, I'm a student." << std::endl;
+        }
+        
     // Functii virtuale pure
     virtual void displayDetails() = 0;
     virtual double calculateGradePointAverage() = 0;
-};
+   };
+}

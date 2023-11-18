@@ -1,6 +1,8 @@
 #include "Student.h"
 #include <iostream>
 
+namespace University{
+
 Student::Student(std::string n, int a, int numberGrades, double *g)
     : name(n), age(a), numberGrades(numberGrades), grades(nullptr) {
     if (numberGrades > 0 && g != nullptr) {
@@ -12,6 +14,7 @@ Student::Student(std::string n, int a, int numberGrades, double *g)
     std::cout << "Constructor cu parametri apelat." << std::endl;
 }
 
+//Destructor 
 Student::~Student() {
     delete[] grades;
     std::cout << "Destructor apelat." << std::endl;
@@ -35,6 +38,7 @@ Student::Student(Student&& other)
     std::cout << "Constructor de mutare apelat." << std::endl;
 }
 
+//Supraincarcarea operatorului de atribuire 
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
         name = other.name;
@@ -55,6 +59,7 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
+//Supraincarcarea operatorului de atribuire pentru move
 Student& Student::operator=(Student&& other) {
     if (this != &other) {
         name = std::move(other.name);
@@ -127,4 +132,5 @@ void Student::printStudentInfo() {
         std::cout << "The student has no grade! ";
     }
     std::cout << std::endl;
+  }
 }
