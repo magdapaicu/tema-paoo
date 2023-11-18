@@ -5,7 +5,6 @@ namespace University {
 
 PostgraduateStudent::PostgraduateStudent(std::string n, int a, int numberGrades, double *g)
     : Student(n, a, numberGrades, g) {
-    // Implementare constructor
     std::cout << "Postgraduate student created: " << n << std::endl;
 }
 
@@ -26,7 +25,6 @@ void PostgraduateStudent::displayDetails() {
 }
 
 double PostgraduateStudent::calculateGradePointAverage() {
-    // Calcularea mediei pentru studentul postuniversitar
     double sum = 0.0;
     double *grades = getGrades();
     if (grades != nullptr) {
@@ -37,5 +35,10 @@ double PostgraduateStudent::calculateGradePointAverage() {
     } else {
         return 0.0;
     }
+  }
+
+  bool PostgraduateStudent::hasPassed() {
+    double averageGrade= calculateGradePointAverage();
+    return (averageGrade >= 5.0);
   }
 }

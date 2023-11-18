@@ -3,10 +3,20 @@
 
 namespace University {
 
-UndergraduateStudent::UndergraduateStudent(std::string n, int a, int numberGrades, double *g)
-    : Student(n, a, numberGrades, g) {
-    // Implementare constructor
+UndergraduateStudent::UndergraduateStudent(std::string n, int a, int numberGrades, double *g, std::string *subjects, int numSubjects)
+    : Student(n, a, numberGrades, g), subjects(nullptr), numSubjects(numSubjects) {
+    if (numSubjects > 0 && subjects != nullptr) {
+        this->subjects = new std::string[numSubjects];
+        for (int i = 0; i < numSubjects; ++i) {
+            this->subjects[i] = subjects[i];
+        }
+    }
     std::cout << "Undergraduate student created: " << n << std::endl;
+}
+// Implementarea destructorului suprascris
+UndergraduateStudent::~UndergraduateStudent() {
+    delete[] subjects;
+    std::cout << "Destructorul pentru UndergraduateStudent a fost apelat." << std::endl;
 }
 
 void UndergraduateStudent::displayDetails() {
@@ -22,11 +32,21 @@ void UndergraduateStudent::displayDetails() {
     } else {
         std::cout << "The student has no grade!";
     }
+
+    std::cout << ", Subjects: ";
+    if (subjects != nullptr) {
+        for (int i = 0; i < numSubjects; i++) {
+            std::cout << subjects[i] << " ";
+        }
+    } else {
+        std::cout << "No subjects available.";
+    }
+
     std::cout << std::endl;
 }
 
-double UndergraduateStudent::calculateGradePointAverage() {
-    // Calcularea mediei pentru studentul pre-universitar
+
+ double UndergraduateStudent::calculateGradePointAverage() {
     double sum = 0.0;
     double *grades = getGrades();
     if (grades != nullptr) {
@@ -37,5 +57,10 @@ double UndergraduateStudent::calculateGradePointAverage() {
     } else {
         return 0.0;
     }
+  }
+
+  bool UndergraduateStudent::hasPassed() {  
+     double averageGrade = calculateGradePointAverage();
+     return (averageGrade >= 5);
   }
 }

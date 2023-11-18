@@ -11,7 +11,7 @@ private:
     double *grades;
 
 protected:
-    int getNumberGrades() const;
+   
 
 public:
     Student(std::string n, int a, int numberGrades, double *g);
@@ -28,6 +28,7 @@ public:
     void setAge(int a);
     double *getGrades() const;
     void setGrades(double *g, int numberGrades);
+    int getNumberGrades() const;
 
     double calculateAverageGrade();
     void printStudentInfo();
@@ -35,6 +36,6 @@ public:
     virtual void introduce();
     virtual void displayDetails() = 0;
     virtual double calculateGradePointAverage() = 0;
-};
-
+    virtual bool hasPassed() = 0;
+  };
 } 

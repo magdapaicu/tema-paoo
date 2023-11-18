@@ -10,5 +10,6 @@ public:
     // Suprascrierea funcțiilor virtuale pure
     void displayDetails() override;
     double calculateGradePointAverage() override;
+    bool hasPassed() override;
   };
 }
