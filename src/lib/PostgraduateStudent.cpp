@@ -9,10 +9,6 @@ PostgraduateStudent::PostgraduateStudent(std::string n, int a, int numberGrades,
     std::cout << "Postgraduate student created: " << n << std::endl;
 }
 
-void PostgraduateStudent::introduce() {
-    std::cout << "Hello, I'm a postgraduate student." << std::endl;
-}
-
 void PostgraduateStudent::displayDetails() {
     std::cout << "Postgraduate student details:" << std::endl;
     std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;

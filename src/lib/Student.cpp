@@ -110,6 +110,11 @@ void Student::setGrades(double *g, int numberGrades) {
     }
 }
 
+int Student::getNumberGrades() const {
+    return numberGrades;
+}
+
+
 double Student::calculateAverageGrade() {
     if (grades == nullptr || numberGrades == 0) {
         return 0.0;
@@ -132,5 +137,9 @@ void Student::printStudentInfo() {
         std::cout << "The student has no grade! ";
     }
     std::cout << std::endl;
-  }
+}
+
+void Student::introduce(){
+  std::cout<<"Hello, I'm student."<<std::endl; 
+  } 
 }

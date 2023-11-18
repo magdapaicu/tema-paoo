@@ -9,10 +9,6 @@ UndergraduateStudent::UndergraduateStudent(std::string n, int a, int numberGrade
     std::cout << "Undergraduate student created: " << n << std::endl;
 }
 
-void UndergraduateStudent::introduce() {
-    std::cout << "Hello, I'm an undergraduate student." << std::endl;
-}
-
 void UndergraduateStudent::displayDetails() {
     std::cout << "Undergraduate student details:" << std::endl;
     std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;
