@@ -13,7 +13,7 @@ void UndergraduateStudent::displayDetails() {
     std::cout << "Grades: ";
     double *grades = getGrades();
     if (grades != nullptr) {
-        for (int i = 0; i < numberGrades; i++) {
+        for (int i = 0; i < getNumberGrades(); i++) {
             std::cout << grades[i] << " ";
         }
         std::cout << ", Average Grade: " << calculateAverageGrade();
@@ -28,10 +28,10 @@ double UndergraduateStudent::calculateGradePointAverage() {
     double sum = 0.0;
     double *grades = getGrades();
     if (grades != nullptr) {
-        for (int i = 0; i < numberGrades; i++) {
+        for (int i = 0; i < getNumberGrades(); i++) {
             sum += grades[i];
         }
-        return sum / numberGrades;
+        return sum / getNumberGrades();
     } else {
         return 0.0;
     }

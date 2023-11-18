@@ -2,12 +2,18 @@
 #include <string>
 
 class Student {
+  
 private:
     std::string name;
     int age;
     int numberGrades;
     double *grades;
     double averageGrade;
+
+protected:
+    int getNumberGrades() const {
+        return numberGrades;
+    }    
 
 public:
     // Constructori
