@@ -5,12 +5,13 @@
 #include <string>
 
 using namespace University;
+using namespace std;
 
 int main() {
     double undergraduateStudentGrades[] = {8.5, 7.9, 9.2};
     double undergraduateStudentGrades1[] = {2, 4, 3};
-    std::string subjects[] = {"Subject1", "Subject2", "Subject3"};
-    std::string subjects1[] = {"PAOO", "CHS", "OOP"};
+    string subjects[] = {"Subject1", "Subject2", "Subject3"};
+    string subjects1[] = {"PAOO", "CHS", "OOP"};
     UndergraduateStudent undergraduateStudent1("Magda", 22, 3, undergraduateStudentGrades, subjects, 3);
     PostgraduateStudent postgrad("Alice", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
     Student* studentPtr = new UndergraduateStudent("John", 20, 4, new double[4]{9.0, 8.5, 7.0, 9.5},subjects, 3);
@@ -23,7 +24,7 @@ int main() {
 
     studentPtr->displayDetails();
 
-    std::cout << "Grade Point Average: " << undergraduateStudent1.calculateGradePointAverage() << std::endl;
+    cout << "Grade Point Average: " << undergraduateStudent1.calculateGradePointAverage() << endl;
 
     postgrad.introduce();
 
@@ -38,25 +39,25 @@ int main() {
     copyOfPostgrad.displayDetails();
 
    if(undergraduateStudent1.hasPassed()){
-    std::cout<<"Studentul a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
+    cout<<"Studentul a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
    } else
    {
-   std::cout<<"Studentul nu a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
+    cout<<"Studentul nu a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
    }
 
       if(postgrad.hasPassed()){
-    std::cout<<"Studentul a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
+        cout<<"Studentul a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
    } else
    {
-   std::cout<<"Studentul nu a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
+        cout<<"Studentul nu a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
    }
  
 // Verific daca sunt identici
    if (postgrad.getName() == copyOfPostgrad.getName() && postgrad.getAge() == copyOfPostgrad.getAge() &&
         postgrad.getNumberGrades() == copyOfPostgrad.getNumberGrades()) {
-        std::cout << "Studentul postuniversitar și copia sa au aceleași informații.\n";
+             cout << "Studentul postuniversitar și copia sa au aceleași informații.\n";
     } else {
-        std::cout << "Studentul postuniversitar și copia sa nu au aceleași informații.\n";
+            cout << "Studentul postuniversitar și copia sa nu au aceleași informații.\n";
     }
 
     return 0;
