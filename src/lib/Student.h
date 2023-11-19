@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
+#include "IStudent.h"
 
 namespace University {
 
-class Student {
+class Student: public IStudent{
 private:
     std::string name;
     int age;
