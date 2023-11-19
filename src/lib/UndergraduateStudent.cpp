@@ -4,15 +4,27 @@
 namespace University {
 
 UndergraduateStudent::UndergraduateStudent(std::string n, int a, int numberGrades, double *g, std::string *subjects, int numSubjects)
-    : Student(n, a, numberGrades, g), subjects(nullptr), numSubjects(numSubjects) {
+    : Student(n, a, numberGrades, g), subjects(nullptr), numSubjects(0) {
     if (numSubjects > 0 && subjects != nullptr) {
         this->subjects = new std::string[numSubjects];
         for (int i = 0; i < numSubjects; ++i) {
             this->subjects[i] = subjects[i];
         }
+        this->numSubjects = numSubjects;
     }
     std::cout << "Undergraduate student created: " << n << std::endl;
 }
+
+
+UndergraduateStudent::UndergraduateStudent(UndergraduateStudent&& other)
+    : Student(std::move(other)), subjects(nullptr), numSubjects(other.numSubjects) {
+    subjects = other.subjects;
+    other.subjects = nullptr;
+    other.numSubjects = 0;
+    std::cout << "Constructor de mutare pentru UndergraduateStudent apelat." << std::endl;
+}
+
+
 // Implementarea destructorului suprascris
 UndergraduateStudent::~UndergraduateStudent() {
     delete[] subjects;

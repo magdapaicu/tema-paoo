@@ -12,7 +12,6 @@ private:
 
 protected:
    
-
 public:
     Student(std::string n, int a, int numberGrades, double *g);
     Student(const Student &other);

@@ -55,6 +55,7 @@ Student& Student::operator=(const Student& other) {
         } else {
             grades = nullptr;
         }
+        std::cout << "Operatorul de atribuire '=' (copiere) a fost apelat." << std::endl;
     }
     return *this;
 }
@@ -72,6 +73,7 @@ Student& Student::operator=(Student&& other) {
         other.numberGrades = 0;
         other.grades = nullptr;
     }
+    std::cout << "Operatorul de atribuire '=' (mutare) a fost apelat." << std::endl;
     return *this;
 }
 

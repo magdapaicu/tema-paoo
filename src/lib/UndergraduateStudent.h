@@ -12,6 +12,7 @@ private:
 public:
      UndergraduateStudent(std::string n, int a, int numberGrades, double *g, std::string *subjects, int numSubjects);
     ~UndergraduateStudent() override;
+    UndergraduateStudent(UndergraduateStudent&& other);
    
     void introduce() override {
         std::cout << "Hello, I'm an undergraduate student." << std::endl;
