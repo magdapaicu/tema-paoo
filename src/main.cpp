@@ -3,9 +3,15 @@
 #include "lib/PostgraduateStudent.h"
 #include <iostream>
 #include <string>
+#include <thread>
 
 using namespace University;
 using namespace std;
+
+void calculateAndPrintAverageGrade(University::Student* student) {
+    std::cout << "Calculating average grade for: " << student->getName() << std::endl;
+    std::cout << "Average grade: " << student->calculateGradePointAverage() << std::endl;
+}
 
 int main() {
     double undergraduateStudentGrades[] = {8.5, 7.9, 9.2};
@@ -17,7 +23,19 @@ int main() {
     Student* studentPtr = new UndergraduateStudent("John", 20, 4, new double[4]{9.0, 8.5, 7.0, 9.5},subjects, 3);
     UndergraduateStudent undergraduateStudent2("Lidia", 19, 3, undergraduateStudentGrades1, subjects1, 3); 
     PostgraduateStudent postgrad2("Maria", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
-    UndergraduateStudent undergraduateStudent3("Marius", 19, 3, undergraduateStudentGrades1, subjects1, 3); 
+    UndergraduateStudent undergraduateStudent3("Marius", 19, 3, undergraduateStudentGrades1, subjects1, 3);
+
+    std::thread thread1(calculateAndPrintAverageGrade, &undergraduateStudent1);
+    std::thread thread2(calculateAndPrintAverageGrade, &undergraduateStudent2);
+    std::thread thread3(calculateAndPrintAverageGrade, &undergraduateStudent3);
+    std::thread thread4(calculateAndPrintAverageGrade, &postgrad);
+    std::thread thread5(calculateAndPrintAverageGrade, &postgrad2);
+
+    thread1.join();
+    thread2.join();
+    thread3.join();
+    thread4.join();
+    thread5.join();
 
 //Constructor de mutare apelat
 
