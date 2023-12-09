@@ -15,11 +15,24 @@ int main() {
     UndergraduateStudent undergraduateStudent1("Magda", 22, 3, undergraduateStudentGrades, subjects, 3);
     PostgraduateStudent postgrad("Alice", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
     Student* studentPtr = new UndergraduateStudent("John", 20, 4, new double[4]{9.0, 8.5, 7.0, 9.5},subjects, 3);
-    UndergraduateStudent undergraduateStudent2("Lidia", 19, 3, undergraduateStudentGrades1, subjects1, 3);
+    UndergraduateStudent undergraduateStudent2("Lidia", 19, 3, undergraduateStudentGrades1, subjects1, 3); 
+    PostgraduateStudent postgrad2("Maria", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
+    UndergraduateStudent undergraduateStudent3("Marius", 19, 3, undergraduateStudentGrades1, subjects1, 3); 
 
-    UndergraduateStudent student3 = std::move(undergraduateStudent1);
-    student3.displayDetails();
+//Constructor de mutare apelat
+
+ UndergraduateStudent student3 = std::move(undergraduateStudent1);
+
+ PostgraduateStudent copyStudent=postgrad2;
   
+//Supraincarcarea operatorului de atribuire
+//    postgrad=postgrad2;
+
+// Supraincarcarea move constructorului
+//     postgrad = std::move(postgrad2);
+
+    student3.displayDetails();
+
     undergraduateStudent1.displayDetails();
 
     studentPtr->displayDetails();
@@ -31,12 +44,14 @@ int main() {
     studentPtr->displayDetails(); 
     delete studentPtr;
 
-    PostgraduateStudent copyOfPostgrad = postgrad;
-    copyOfPostgrad = postgrad;
+    cout << "---------------------------------------------------------"<<endl;
 
-    copyOfPostgrad = PostgraduateStudent("Bob", 23, 3, new double[3]{7.0, 8.0, 9.0});
+// Constructor de copiere apelat
+// PostgraduateStudent copyOfPostgrad = postgrad;
 
-    copyOfPostgrad.displayDetails();
+//Constructor de mutare apelat
+ PostgraduateStudent moveOfPostgrad = std::move(postgrad);
+
 
    if(undergraduateStudent1.hasPassed()){
     cout<<"Studentul a trecut cu media " << postgrad.calculateAverageGrade()<<" !\n";
@@ -53,12 +68,12 @@ int main() {
    }
  
 // Verific daca sunt identici
-   if (postgrad.getName() == copyOfPostgrad.getName() && postgrad.getAge() == copyOfPostgrad.getAge() &&
-        postgrad.getNumberGrades() == copyOfPostgrad.getNumberGrades()) {
-             cout << "Studentul postuniversitar și copia sa au aceleași informații.\n";
-    } else {
-            cout << "Studentul postuniversitar și copia sa nu au aceleași informații.\n";
-    }
+//    if (postgrad.getName() == copyOfPostgrad.getName() && postgrad.getAge() == copyOfPostgrad.getAge() &&
+//         postgrad.getNumberGrades() == copyOfPostgrad.getNumberGrades()) {
+//              cout << "Studentul postuniversitar și copia sa au aceleași informații.\n";
+//     } else {
+//             cout << "Studentul postuniversitar și copia sa nu au aceleași informații.\n";
+//     }
 
     return 0;
 }
