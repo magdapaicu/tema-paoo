@@ -1,5 +1,6 @@
 #include "UndergraduateStudent.h"
 #include <iostream>
+#include <mutex>
 
 namespace University {
 
@@ -32,6 +33,8 @@ UndergraduateStudent::~UndergraduateStudent() {
 }
 
 void UndergraduateStudent::displayDetails() {
+
+    std::lock_guard<std::mutex> lock(dataMutex);
     std::cout << "Undergraduate student details:" << std::endl;
     std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;
     std::cout << "Grades: ";

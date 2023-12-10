@@ -4,13 +4,26 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <atomic>
+#include <vector> 
 
 using namespace University;
 using namespace std;
 
+std::atomic<int> semaphore(1);
+
 void calculateAndPrintAverageGrade(University::Student* student) {
+
+    // Un fir de executie incearca sa acceseze functiile, atunci valoarea semaforului este decrementata la 0 si este permis sa le acceseze;
+    // Cand vine alt fir sa acceseze iar functiile valoarea semaforului este deja 0 si nu mai poate decrementa nimic;
+    // In cazul asta semaforul il blocheaza si va trebui sa astepte pana valoarea semaforului va deveni din nou 1;
+
+    semaphore.fetch_sub(1);  // valoarea semaforului este decrementata la 0
+    
     std::cout << "Calculating average grade for: " << student->getName() << std::endl;
     std::cout << "Average grade: " << student->calculateGradePointAverage() << std::endl;
+
+    semaphore.fetch_add(1); // valoarea semaforului este incrementata la 1
 }
 
 int main() {
@@ -25,23 +38,25 @@ int main() {
     PostgraduateStudent postgrad2("Maria", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
     UndergraduateStudent undergraduateStudent3("Marius", 19, 3, undergraduateStudentGrades1, subjects1, 3);
 
-    std::thread thread1(calculateAndPrintAverageGrade, &undergraduateStudent1);
-    std::thread thread2(calculateAndPrintAverageGrade, &undergraduateStudent2);
-    std::thread thread3(calculateAndPrintAverageGrade, &undergraduateStudent3);
-    std::thread thread4(calculateAndPrintAverageGrade, &postgrad);
-    std::thread thread5(calculateAndPrintAverageGrade, &postgrad2);
 
-    thread1.join();
-    thread2.join();
-    thread3.join();
-    thread4.join();
-    thread5.join();
+    std::vector<std::thread> threads; // vector care contine fire de executie.
+    // emplace_back => adauga un nou obiect std::tread in vectorul threads. 
+    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent1);
+    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent2);
+    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent3);
+    threads.emplace_back(calculateAndPrintAverageGrade, &postgrad);
+    threads.emplace_back(calculateAndPrintAverageGrade, &postgrad2);
+
+    for (auto& t : threads) {
+        t.join();  //join asteapta ca fiecare fir de executie sa se termine.
+    }
 
 //Constructor de mutare apelat
 
  UndergraduateStudent student3 = std::move(undergraduateStudent1);
 
- PostgraduateStudent copyStudent=postgrad2;
+ PostgraduateStudent copyStudent = std::move(postgrad2);
+
   
 //Supraincarcarea operatorului de atribuire
 //    postgrad=postgrad2;
@@ -68,6 +83,7 @@ int main() {
 // PostgraduateStudent copyOfPostgrad = postgrad;
 
 //Constructor de mutare apelat
+
  PostgraduateStudent moveOfPostgrad = std::move(postgrad);
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Student.h"
 #include <iostream> 
+#include <mutex>
 
 namespace University {
 
@@ -8,6 +9,7 @@ class UndergraduateStudent : public Student {
 private:
     std::string *subjects;
     int numSubjects;
+    std::mutex dataMutex;
 
 public:
      UndergraduateStudent(std::string n, int a, int numberGrades, double *g, std::string *subjects, int numSubjects);
