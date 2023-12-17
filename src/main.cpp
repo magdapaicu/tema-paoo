@@ -6,25 +6,33 @@
 #include <thread>
 #include <atomic>
 #include <vector> 
+#include <chrono>
 
 using namespace University;
 using namespace std;
 
-std::atomic<int> semaphore(1);
+struct SemaphoreWithTimer {
+    std::atomic<int> semaphore;
+    std::atomic<int> totalWaitingTime;
 
-void calculateAndPrintAverageGrade(University::Student* student) {
+    SemaphoreWithTimer(int initialValue = 1) : semaphore(initialValue), totalWaitingTime(0) {}
+};
 
-    // Un fir de executie incearca sa acceseze functiile, atunci valoarea semaforului este decrementata la 0 si este permis sa le acceseze;
-    // Cand vine alt fir sa acceseze iar functiile valoarea semaforului este deja 0 si nu mai poate decrementa nimic;
-    // In cazul asta semaforul il blocheaza si va trebui sa astepte pana valoarea semaforului va deveni din nou 1;
+void calculateAndPrintAverageGrade(SemaphoreWithTimer& semTimer, const string& studentName) {
+    auto start = std::chrono::steady_clock::now();
 
-    semaphore.fetch_sub(1);  // valoarea semaforului este decrementata la 0
-    
-    std::cout << "Calculating average grade for: " << student->getName() << std::endl;
-    std::cout << "Average grade: " << student->calculateGradePointAverage() << std::endl;
+    cout << "Calculating grade point average for: " << studentName << endl;
 
-    semaphore.fetch_add(1); // valoarea semaforului este incrementata la 1
+    semTimer.semaphore.fetch_sub(1); // Decrementare semafor
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    semTimer.semaphore.fetch_add(1); // Incrementare semafor
+
+    auto end = std::chrono::steady_clock::now();
+    semTimer.totalWaitingTime += std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
 }
+
 
 int main() {
     double undergraduateStudentGrades[] = {8.5, 7.9, 9.2};
@@ -38,18 +46,20 @@ int main() {
     PostgraduateStudent postgrad2("Maria", 25, 4, new double[4]{8.0, 7.5, 9.0, 9.5});
     UndergraduateStudent undergraduateStudent3("Marius", 19, 3, undergraduateStudentGrades1, subjects1, 3);
 
+    SemaphoreWithTimer semTimer;
 
     std::vector<std::thread> threads; // vector care contine fire de executie.
     // emplace_back => adauga un nou obiect std::tread in vectorul threads. 
-    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent1);
-    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent2);
-    threads.emplace_back(calculateAndPrintAverageGrade, &undergraduateStudent3);
-    threads.emplace_back(calculateAndPrintAverageGrade, &postgrad);
-    threads.emplace_back(calculateAndPrintAverageGrade, &postgrad2);
+    threads.emplace_back(calculateAndPrintAverageGrade,std::ref(semTimer), "undergraduateStudent1");
+    threads.emplace_back(calculateAndPrintAverageGrade,std::ref(semTimer), "undergraduateStudent2");
+    threads.emplace_back(calculateAndPrintAverageGrade,std::ref(semTimer), "postgrad");
+    threads.emplace_back(calculateAndPrintAverageGrade, std::ref(semTimer),"postgrad2");
 
     for (auto& t : threads) {
         t.join();  //join asteapta ca fiecare fir de executie sa se termine.
     }
+
+     cout << "Total waiting time for all threads: " << semTimer.totalWaitingTime << " seconds" << endl;
 
 //Constructor de mutare apelat
 

@@ -36,6 +36,7 @@ void UndergraduateStudent::displayDetails() {
 
     std::lock_guard<std::mutex> lock(dataMutex);
     std::cout << "Undergraduate student details:" << std::endl;
+    std::cout << "Accessing shared resources using mutex..." << std::endl;
     std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;
     std::cout << "Grades: ";
     double *grades = getGrades();

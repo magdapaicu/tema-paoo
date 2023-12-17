@@ -17,7 +17,7 @@ PostgraduateStudent::PostgraduateStudent(PostgraduateStudent&& other)
 void PostgraduateStudent::displayDetails() {
     if (dataMutex) { // Verificăm dacă std::unique_ptr este valid
         std::lock_guard<std::mutex> lock(*dataMutex.get()); // Folosim get() pentru a accesa std::mutex
-        std::cout << "Postgraduate student details:" << std::endl;
+        std::cout << "Accessing shared resources using mutex..." << std::endl;
 
         std::cout << "Name: " << getName() << ", Age: " << getAge() << std::endl;
         std::cout << "Grades: ";
@@ -33,7 +33,6 @@ void PostgraduateStudent::displayDetails() {
         std::cout << std::endl;
     }
 }
-
 
 double PostgraduateStudent::calculateGradePointAverage() {
     double sum = 0.0;
